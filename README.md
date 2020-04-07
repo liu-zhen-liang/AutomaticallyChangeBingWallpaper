@@ -1,0 +1,2 @@
+# AutomaticallyChangeBingWallpaper
+每天自动更换“必应”网站背景图片为电脑桌面背景图片
