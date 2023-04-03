@@ -14,7 +14,7 @@ namespace AutomaticWallpaperChange
         static void Main(string[] args)
         {
             //设置当前程序开机自启动【如果设置了Windows的 任务计划程序就可以注释掉这个开机自启】
-            SetExecSelfStarting();
+            //SetExecSelfStarting();
             //获取必应壁纸URL
             var url = GetBingImageUrl();
             //下载图片到本地并返回本地图片文件路径
@@ -81,12 +81,12 @@ namespace AutomaticWallpaperChange
             {
                 //设置下载的HTML文件的编码为UTF-8
                 client.Encoding = Encoding.UTF8;
-                //下载必应中国的首页HTML文件
-                var html = client.DownloadString("https://cn.bing.com/");
+                //利用Bing壁纸API请求背景图片信息
+                var html = client.DownloadString("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-cn");
                 //使用正则得到背景图片地址
-                var match = Regex.Match(html, "id=\"bgLink\".*?href=\"(.+?)\"");
+                var match = Regex.Match(html, "\"urlbase\":\\\"/th\\?id=(.+?)\"");
                 //得到背景图片URL
-                return string.Format("https://cn.bing.com{0}", match.Groups[1].Value);
+                return string.Format("https://www.bing.com/th?id={0}_UHD.jpg&rf=LaDigue_UHD.jpg&pid=hp&w=3840&h=2160&rs=1&c=4", match.Groups[1].Value);
             }
         }
 
